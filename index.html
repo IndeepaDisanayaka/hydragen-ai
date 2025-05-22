@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Document</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="icon" href="favicon.png">
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/efbac16430.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body onload="load('BTCUSDT');news('BTC');changenterval();">
+    <div class="main-main">
+        <div class="" style="display: flex;flex-direction: column;width: 30%;gap: 1rem;">
+            <div class="main custom1">
+                <select name="" id="symbol-select" onchange="symbolSelect(this)">
+                    <option value="BTC">SELECT</option>
+                    <option value="XRP">XRPUSDT</option>
+                    <option value="LINK">LINKUSDT</option>
+                    <option value="CETUS">CETUSUSDT</option>
+                    <option value="SUI">SUIUSDT</option>
+                    <option value="LTC">LTCUSDT</option>
+                </select>
+                <span id="symbol">BTCUSDT | 000000.00</span>
+                <div class="ref-loader">
+                    <span style="text-align: center;">Referrance ( CoinDesk )</span>
+                    <div class="cd-eria">
+                        <!-- <button value="" class="cd text" onclick="clipInput(this);"> </button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="main custom1">
+                <select name="" id="klineCandle-intervel" onchange="changenterval(this)">
+                    <option value="1m">1m</option>
+                    <option value="15m">15m</option>
+                    <option value="1h">1h</option>
+                    <option value="4h">4h</option>
+                    <option value="1d">1d</option>
+                </select>
+                <span id="candle-time-range">Used 1m Candles to Analysis</span>
+                <div class="ref-loader">
+                    <span style="text-align: center;">Referrance ( Binance )</span>
+                    <div class="cd-eria candle-eria">
+                        <!-- <button value="" class="cd text" onclick="clipInput(this);">BTC-1m</button> -->
+                    </div>
+                </div>
+            </div>
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+
+
+        <div class="main">
+            <div class="tools">
+                <div>
+                    <input type="checkbox" checked id="srm" />
+                    <span>Shift Response Mode</span>
+                </div>
+                <button onclick="setApi();" class="btn setapiBtn" style="display: none;">
+                    <i class="fa-solid fa-key"></i>&nbsp;CoinDesk API Key
+                </button>
+                <button onclick="localStorage.removeItem('coindesk');location.reload();" class="btn removeapiBtn" style="display: none;">
+                    <i class="fa-solid fa-key"></i>&nbsp;Remove API Key
+                </button>
+            </div>
+            <div class="body">
+                <!-- <div class="my">
+                    <span class="text">---</span>
+                </div>
+                <div class="resp">
+                    <span class="text txt-animater">---</span>
+    
+                </div>
+                <div class="resp">
+                    <img src="asset/033336904.png" alt="ai-image" style="width: 90%;" />
+                </div> -->
+
+                <div class="empty-ariea">
+                    <span style="font-size: 25px;">Compute Your Analysis With HydraGen Intelligence (Referrance Gemini
+                        2.0 Model) <br>...</span>
+                </div>
+            </div>
+            <div class="option">
+                <div style="width: 100%;display: flex;flex-direction: column;gap: 0.5rem;">
+                    <span id="length"
+                        style="background-color: black;color: white;width: fit-content;padding: 0.4rem;">Length :
+                        0</span>
+                    <textarea oninput="changeInput(this,'length')" placeholder="Enter to process" type="text"
+                        class="option-send input" name="" id="req-value" onkeyup="send(event);"></textarea>
+
+                </div>
+
+                <button class="option-btn cd" onclick="send();">
+                    <span>Process</span>
+                    <dotlottie-player src="https://lottie.host/3ad46813-d506-4fd5-be28-f1ddc1e69eee/FTFAqgaODs.lottie"
+                        background="transparent" speed="1" style="width: 40px; height: 40px" loop autoplay
+                        id="spinner"></dotlottie-player>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="TextReader.js"></script>
+    <script src="TypeWritter.js"></script>
+    <script src="chartview.js"></script>
+    <script src="price.js"></script>
+    <script src="news.js"></script>
+
+</body>
+
+</html>

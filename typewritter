@@ -1,0 +1,44 @@
+class TypeWritter {
+    text;
+    constructor(text) {
+        this.text = text;
+    }
+
+    async process(id) {
+        const container = document.getElementById(id);
+        container.className = "resp text";
+        const body = document.querySelector(".body");
+        let isBold = false;
+
+        const frag = document.createDocumentFragment(); // batching 🧱
+
+        for (let i = 0; i < this.text.length; i++) {
+            const curr = this.text[i];
+            const prev = this.text[i - 1];
+
+            // 🧠 Check for ** toggle
+            if (curr === "*" && prev === "*") {
+                isBold = !isBold;
+                continue; // skip this star
+            }
+
+            if (curr === "*") continue; // skip single *
+
+            const el = document.createElement(isBold ? "strong" : "span");
+            el.className = "text";
+            el.textContent = curr === " " ? "\u00A0" : curr;
+            frag.appendChild(el);
+
+            // 💤 Append every few characters for performance
+            if (i % 5 === 0 || i === this.text.length - 1) {
+                container.appendChild(frag);
+                body.scrollTop = body.scrollHeight;
+                await new Promise(resolve => setTimeout(resolve, 10));
+            }
+        }
+
+        // 🔚 Final append
+        container.appendChild(frag);
+        body.scrollTop = body.scrollHeight;
+    }
+}
