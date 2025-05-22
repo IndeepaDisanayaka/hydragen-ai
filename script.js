@@ -45,7 +45,7 @@ async function send(event) {
     var spinner = document.getElementById("spinner");
     spinner.style.display = "block";
     const body = document.querySelector(".body");
-    const response = await fetch("http://localhost:5000/gemini", {
+    const response = await fetch("https://hydragen-ai.vercel.app/gemini", {
         method: "POST",
         headers: {
             "Content-Type": "application/json", // 🔥 Required for express.json()
@@ -92,7 +92,7 @@ async function send(event) {
                 spinner.setAttribute("autoplay", "");
 
                 resp.appendChild(spinner);
-                const imgGen = await fetch("http://localhost:5000/gemini/image-gen?promt=" + promt + "&&chatid=" + randomValue, {
+                const imgGen = await fetch("https://hydragen-ai.vercel.app/gemini/image-gen?promt=" + promt + "&&chatid=" + randomValue, {
                     method: "GET",
                 }).catch((error) => {
                     alert(error)
@@ -148,7 +148,7 @@ async function changenterval() {
     candleEria.innerHTML = "";
     const button = document.createElement("button");
 
-    const response = await fetch(`http://localhost:5000/kline?symbol=${selectSymbol.value + "USDT"}&&interval=${klineCandleIntervel.value}`, {
+    const response = await fetch(`https://hydragen-ai.vercel.app/kline?symbol=${selectSymbol.value + "USDT"}&&interval=${klineCandleIntervel.value}`, {
         method: "GET",
     }).catch((error) => {
         console.log(error);
